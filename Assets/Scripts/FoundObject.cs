@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FoundObject : MonoBehaviour
@@ -9,6 +7,7 @@ public class FoundObject : MonoBehaviour
     public float rotateSpeed;
     public float moveSpeed;
     Vector3 targetPosition;
+    private ItemCounts itemCounts;
 
     //Variables for chance/percentage to find objects
     float randomValue;
@@ -25,6 +24,7 @@ public class FoundObject : MonoBehaviour
 
     void Start()
     {
+        itemCounts = GameObject.FindObjectOfType<ItemCounts>();
         //Set position and destination
         targetPosition = transform.position;
         targetPosition.y = transform.position.y + 1;  //Moves object 1 unit up
@@ -71,14 +71,14 @@ public class FoundObject : MonoBehaviour
         //spawn coin gameobject
         Debug.Log("Got Coin");
         SetChildToParent(coinObject);  //Instantiates object
-
-        
+        itemCounts.IncrementItemCount(1, ItemType.Coin);
     }
 
     void GetBattery()
     {
         Debug.Log("Got Battery");
         SetChildToParent(batteryObject);
+        itemCounts.IncrementItemCount(1, ItemType.Battery);
     }
 
     void GetDiamond()
@@ -88,5 +88,6 @@ public class FoundObject : MonoBehaviour
         //Spawn Diamond gameobject
         Debug.Log("Got Diamond");
         SetChildToParent(diamondObject);
+        itemCounts.IncrementItemCount(1, ItemType.Diamond);
     }
 }
