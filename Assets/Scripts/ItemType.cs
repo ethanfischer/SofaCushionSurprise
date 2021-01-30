@@ -2,5 +2,6 @@
 {
     Coin,
     Battery,
-    Diamond
+    Diamond,
+    Nothing
 }

@@ -8,6 +8,7 @@ public class FoundObject : MonoBehaviour
     public float moveSpeed;
     Vector3 targetPosition;
     private ItemCounts itemCounts;
+    private Randomizer randomizer;
 
     //Variables for chance/percentage to find objects
     float randomValue;
@@ -20,33 +21,33 @@ public class FoundObject : MonoBehaviour
     //Money/Coin variables
     public int minCoins;
     public int maxCoins;
- 
 
     void Start()
     {
         itemCounts = GameObject.FindObjectOfType<ItemCounts>();
+        randomizer = GameObject.FindObjectOfType<Randomizer>();
+
         //Set position and destination
         targetPosition = transform.position;
         targetPosition.y = transform.position.y + 1;  //Moves object 1 unit up
 
-        //Determine what object will be found
-        randomValue = Random.value;  //numbers match change. ie: 0.3 = 30%
-        //Smallest chance goes first and on through the line...
-        if(randomValue < 0.2f)
+        switch (randomizer.ChooseItem())
         {
-            GetDiamond();
+            case nameof(ItemType.Nothing):
+                GetNothing();
+                break;
+            case nameof(ItemType.Coin):
+                GetCoin();
+                break;
+            case nameof(ItemType.Battery):
+                GetBattery();
+                break;
+            case nameof(ItemType.Diamond):
+                GetDiamond();
+                break;
+            default:
+                break;
         }
-        else if (randomValue < 0.4f)
-        {
-            //Get battery?
-            GetBattery();
-        }
-        else  //last bit is money
-        {
-            GetCoin();
-        }
-
-        //Do a thing based specifically on the object found. ie: Add money to total or add battery to inventory...
     }
 
     
@@ -63,6 +64,11 @@ public class FoundObject : MonoBehaviour
         childGO.transform.SetParent(this.transform);
     }
 
+    void GetNothing()
+    {
+        Debug.Log("Got Nothing");
+    }
+
     void GetCoin()
     {
         //Determine how much money is found
@@ -73,6 +79,7 @@ public class FoundObject : MonoBehaviour
         SetChildToParent(coinObject);  //Instantiates object
         itemCounts.IncrementItemCount(1, ItemType.Coin);
     }
+
 
     void GetBattery()
     {
