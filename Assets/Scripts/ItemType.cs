@@ -3,5 +3,6 @@
     Coin,
     Battery,
     Diamond,
-    Nothing
+    Nothing,
+    ScriptedItem
 }
