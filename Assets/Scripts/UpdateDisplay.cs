@@ -7,7 +7,7 @@ using TMPro;
 public class UpdateDisplay : MonoBehaviour
 {
 
-    public ItemCounts itemCounts;
+    public ItemStates itemStates;
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI batteryCount;
 
@@ -21,11 +21,11 @@ public class UpdateDisplay : MonoBehaviour
 
     void CoinCountUpdate()
     {
-        coinCount.text = itemCounts.coinCount.ToString();
+        coinCount.text = itemStates.coinCount.ToString();
     }
 
     void BatteryCountUpdate()
     {
-        batteryCount.text = itemCounts.batteryCount.ToString();
+        batteryCount.text = itemStates.batteryCount.ToString();
     }
 }
