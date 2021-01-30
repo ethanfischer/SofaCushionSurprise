@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FoundObject : MonoBehaviour
@@ -45,12 +46,34 @@ public class FoundObject : MonoBehaviour
             case nameof(ItemType.Diamond):
                 GetDiamond();
                 break;
+            case nameof(ItemType.ScriptedItem):
+                GetScriptedItem();
+                break;
             default:
                 break;
         }
     }
 
-    
+    //var scriptedEventCount = 0;
+    //string[] scriptItems =
+    //{
+    //    "Diamond",
+    //    "Phone",
+    //    "Vacuum"
+    //}
+    private void GetScriptedItem()
+    {
+
+        //var item = scriptItems[scriptedEventCount];
+
+        //if(item == "Diamond")
+        //{
+        //    //GetDiamond();
+        //}
+
+        //scriptedEventCount++;
+    }
+
     void Update()
     {
         transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);

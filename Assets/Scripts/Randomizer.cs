@@ -16,13 +16,14 @@ public class Randomizer : MonoBehaviour
         nameof(ItemType.Nothing),
         nameof(ItemType.Coin),
         nameof(ItemType.Battery),
-        nameof(ItemType.Diamond)
+        nameof(ItemType.Diamond),
+        nameof(ItemType.ScriptedItem)
     };
 
     public string ChooseItem()
     {
         var total = Distributions.Sum();
-        var randomNumber = Random.Range(0, total+1);
+        var randomNumber = Random.Range(1, total+1);
         for (var i = 0; i < Distributions.Length; i++)
         {
             if (randomNumber <= Distributions[i])
