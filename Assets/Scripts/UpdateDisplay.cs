@@ -10,6 +10,11 @@ public class UpdateDisplay : MonoBehaviour
     public ItemStates itemStates;
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI batteryCount;
+    public TextMeshProUGUI diamondCount;
+    public TextMeshProUGUI diamondTotalValueText;
+    public int diamondSellValue;
+    public int diamondTotalValueInt;
+    public GameObject phoneDisplay;
 
     // Update is called once per frame
     void Update()
@@ -27,5 +32,24 @@ public class UpdateDisplay : MonoBehaviour
     void BatteryCountUpdate()
     {
         batteryCount.text = itemStates.batteryCount.ToString();
+    }
+
+    void DiamondCountUpdate()
+    {
+        diamondCount.text = itemStates.diamondCount.ToString();
+        diamondTotalValueInt = itemStates.diamondCount * diamondSellValue;
+        diamondTotalValueText.text = diamondTotalValueInt.ToString();
+    }
+
+    void SellDiamonds()
+    {
+        int diamondDecreaseAmount = itemStates.diamondCount;
+        itemStates.IncrementItemCount(-diamondDecreaseAmount, ItemType.Diamond);
+        itemStates.IncrementItemCount(diamondTotalValueInt, ItemType.Coin);
+    }
+
+    public void OpenClosePhoneDisplay()
+    {
+        phoneDisplay.SetActive(!phoneDisplay.activeSelf);
     }
 }
