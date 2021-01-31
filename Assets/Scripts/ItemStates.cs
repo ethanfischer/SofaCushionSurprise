@@ -13,7 +13,6 @@ public class ItemStates : MonoBehaviour
     public bool discoveredVacuum { get; private set; } = false;
     public bool discoveredDiamond { get; private set; } = false;
 
-
     public void IncrementItemCount(int amount, ItemType itemType)
     {
         switch (itemType)
@@ -31,7 +30,6 @@ public class ItemStates : MonoBehaviour
                 Debug.LogError($"Item type {itemType} can't be incremented");
                 break;
         }
-        itemType += amount;
     }
 
     public void DiscoverItem(ItemType itemType)
@@ -43,6 +41,12 @@ public class ItemStates : MonoBehaviour
                 break;
             case ItemType.Phone:
                 discoveredPhone = true;
+                break;
+            case ItemType.Diamond:
+                discoveredDiamond = true;
+                break;
+            case ItemType.Gum:
+                discoveredGum = true;
                 break;
             default:
                 Debug.LogError($"Can't enable item type {itemType}");

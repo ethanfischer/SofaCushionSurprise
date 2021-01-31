@@ -9,7 +9,9 @@ public class ScriptedItemManager : MonoBehaviour
     public GameObject Diamond;
     public GameObject Vacuum;
 
-    private int counter = 0;
+    public int RequiredClicksBetweenDiscoveries = 0;
+
+    private int scriptCounter = 0;
     public string[] scriptedItems =
     {
         nameof(ItemType.Diamond),
@@ -18,49 +20,75 @@ public class ScriptedItemManager : MonoBehaviour
     };
 
     private ItemStates itemStates;
+    private ClickCounter clickCounter;
+    private int previousDiscoveryClick = 0;
 
     private void Start()
     {
         itemStates = GameObject.FindObjectOfType<ItemStates>();
+        clickCounter = GameObject.FindObjectOfType<ClickCounter>();
     }
 
     public GameObject GetNextScriptedItem()
     {
+        if (ShouldPreventNextDiscovery()) return null; 
+
         GameObject result;
-        var item = scriptedItems[counter];
+        var item = scriptedItems[scriptCounter];
+
         switch (item)
         {
             case nameof(ItemType.Diamond):
-                result = GetDiamond();
+                result = DiscoverDiamond();
                 break;
             case nameof(ItemType.Phone):
-                result = GetPhone();
+                result = DiscoverPhone();
                 break;
             case nameof(ItemType.Vacuum):
-                result = GetVacuum();
+                result = DiscoverVacuum();
                 break;
             default:
                 result = null;
                 break;
         }
 
-        counter++;
+        previousDiscoveryClick = clickCounter.clickCount;
+        scriptCounter++;
         return result;
     }
 
-    private GameObject GetPhone()
+    private bool ShouldPreventNextDiscovery()
+    {
+        var didDiscoverTooSoon = clickCounter.clickCount <= previousDiscoveryClick + RequiredClicksBetweenDiscoveries;
+        if(didDiscoverTooSoon)
+        {
+            Debug.Log("Next discovery happened too soon, skipping");
+        }
+
+        var hasDiscoveredLastScriptedItem = scriptCounter >= scriptedItems.Length;
+        if(hasDiscoveredLastScriptedItem)
+        {
+            Debug.Log("Player has discovered all the items");
+        }
+
+        return didDiscoverTooSoon || hasDiscoveredLastScriptedItem;
+    }
+
+    private GameObject DiscoverPhone()
     {
         itemStates.DiscoverItem(ItemType.Phone);
         return Phone;
     }
 
-    private GameObject GetDiamond()
+    private GameObject DiscoverDiamond()
     {
+        itemStates.DiscoverItem(ItemType.Diamond);
         return Diamond;
     }
 
-    private GameObject GetVacuum()
+    private GameObject DiscoverVacuum()
     {
+        itemStates.DiscoverItem(ItemType.Vacuum);
         return Vacuum;
     }
 }

@@ -10,6 +10,7 @@ public class FoundObject : MonoBehaviour
     private ItemStates itemStates;
     private Randomizer randomizer;
     private ScriptedItemManager scriptedItemManager;
+    private ClickCounter clickCounter;
 
     //Spawn Objects variables
     public GameObject coinObject;
@@ -25,6 +26,7 @@ public class FoundObject : MonoBehaviour
         itemStates = GameObject.FindObjectOfType<ItemStates>();
         randomizer = GameObject.FindObjectOfType<Randomizer>();
         scriptedItemManager = GameObject.FindObjectOfType<ScriptedItemManager>();
+        clickCounter = GameObject.FindObjectOfType<ClickCounter>();
 
         //Set position and destination
         targetPosition = transform.position;
@@ -50,11 +52,15 @@ public class FoundObject : MonoBehaviour
             default:
                 break;
         }
+
+        clickCounter.IncrementClickCount();
     }
 
     private void GetScriptedItem()
     {
         var scriptedItem = scriptedItemManager.GetNextScriptedItem();
+        if (scriptedItem == null) return;
+
         SetChildToParent(scriptedItem);
         Debug.Log($"Got scripted item: {scriptedItem.name}");
     }

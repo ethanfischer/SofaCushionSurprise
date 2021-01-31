@@ -16,8 +16,8 @@ public class Randomizer : MonoBehaviour
         nameof(ItemType.Nothing),
         nameof(ItemType.Coin),
         nameof(ItemType.Battery),
-        nameof(ItemType.Vacuum),
-        nameof(ItemType.ScriptedItem)
+        nameof(ItemType.Diamond),
+        nameof(ItemType.ScriptedItem),
     };
 
     public string ChooseItem()

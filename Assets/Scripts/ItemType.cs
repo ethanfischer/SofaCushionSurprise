@@ -6,5 +6,6 @@
     Vacuum,
     Nothing,
     ScriptedItem,
-    Phone
+    Phone,
+    Gum
 }
