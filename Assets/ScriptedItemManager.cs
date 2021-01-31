@@ -91,6 +91,7 @@ public class ScriptedItemManager : MonoBehaviour
     private GameObject DiscoverDiamond()
     {
         itemStates.DiscoverItem(ItemType.Diamond);
+        itemStates.IncrementItemCount(1, ItemType.Diamond);
         return Diamond;
     }
 
