@@ -13,6 +13,8 @@ public class ItemStates : MonoBehaviour
     public bool discoveredVacuum { get; private set; } = false;
     public bool discoveredDiamond { get; private set; } = false;
 
+    public bool isVacuumEquipped { get; set; }
+
     public void IncrementItemCount(int amount, ItemType itemType)
     {
         switch (itemType)
@@ -22,6 +24,7 @@ public class ItemStates : MonoBehaviour
                 break;
             case ItemType.Battery:
                 batteryCount += amount;
+                if (batteryCount < 0) batteryCount = 0;
                 break;
             case ItemType.Diamond:
                 diamondCount += amount;

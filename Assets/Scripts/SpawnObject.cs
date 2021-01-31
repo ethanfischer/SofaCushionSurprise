@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SpawnObject : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class SpawnObject : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         //Destroy any existing GOs before spawning a new one
         GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("GO Container");
         foreach (GameObject go in spawnedObjects)
