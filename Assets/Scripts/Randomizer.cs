@@ -3,22 +3,9 @@ using UnityEngine;
 
 public class Randomizer : MonoBehaviour
 {
-    public int[] Distributions =
-    {
-        250,
-        50,
-        25,
-        5
-    };
+    public int[] Distributions;
 
-    public string[] Items =
-    {
-        nameof(ItemType.Nothing),
-        nameof(ItemType.Coin),
-        nameof(ItemType.Battery),
-        nameof(ItemType.Diamond),
-        nameof(ItemType.ScriptedItem),
-    };
+    public string[] Items;
 
     public string ChooseItem()
     {
