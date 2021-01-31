@@ -89,6 +89,7 @@ public class ScriptedItemManager : MonoBehaviour
     private GameObject DiscoverVacuum()
     {
         itemStates.DiscoverItem(ItemType.Vacuum);
+        itemStates.isVacuumEquipped = true; //TODO remove this once we make the vacuum button work
         return Vacuum;
     }
 }

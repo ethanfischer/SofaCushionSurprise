@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class FoundObject : MonoBehaviour
@@ -89,9 +88,24 @@ public class FoundObject : MonoBehaviour
         //Display text stating how much money is found
         //Add money to total
         //spawn coin gameobject
-        Debug.Log("Got Coin");
         SetChildToParent(coinObject);  //Instantiates object
-        itemStates.IncrementItemCount(1, ItemType.Coin);
+        var amount = GetCoinAmount();
+        itemStates.IncrementItemCount(amount, ItemType.Coin);
+        Debug.Log($"Got {amount} Coin(s)");
+    }
+
+    private int GetCoinAmount()
+    {
+        var isVaccumEquippedAndCharged = itemStates.discoveredVacuum && itemStates.isVacuumEquipped && itemStates.batteryCount > 0;
+        if (isVaccumEquippedAndCharged)
+        {
+            itemStates.IncrementItemCount(-1, ItemType.Battery); //use a battery each time the vacuum is enabled
+            return Random.Range(1, randomizer.MaxCoinsVacuum);
+        }
+        else
+        {
+            return Random.Range(1, randomizer.MaxCoinsNormal);
+        }
     }
 
     void GetBattery()

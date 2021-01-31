@@ -6,6 +6,8 @@ public class Randomizer : MonoBehaviour
     public int[] Distributions;
 
     public string[] Items;
+    public int MaxCoinsNormal;
+    public int MaxCoinsVacuum;
 
     public string ChooseItem()
     {
