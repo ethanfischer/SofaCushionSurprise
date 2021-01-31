@@ -3,6 +3,9 @@
     Coin,
     Battery,
     Diamond,
+    Vacuum,
     Nothing,
-    ScriptedItem
+    ScriptedItem,
+    Phone,
+    Gum
 }

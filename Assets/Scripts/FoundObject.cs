@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class FoundObject : MonoBehaviour
 {
-
     //Variables for motion
     public float rotateSpeed;
     public float moveSpeed;
     Vector3 targetPosition;
-    private ItemCounts itemCounts;
+    private ItemStates itemStates;
     private Randomizer randomizer;
-
-    //Variables for chance/percentage to find objects
-    float randomValue;
+    private ScriptedItemManager scriptedItemManager;
+    private ClickCounter clickCounter;
 
     //Spawn Objects variables
     public GameObject coinObject;
@@ -25,8 +23,10 @@ public class FoundObject : MonoBehaviour
 
     void Start()
     {
-        itemCounts = GameObject.FindObjectOfType<ItemCounts>();
+        itemStates = GameObject.FindObjectOfType<ItemStates>();
         randomizer = GameObject.FindObjectOfType<Randomizer>();
+        scriptedItemManager = GameObject.FindObjectOfType<ScriptedItemManager>();
+        clickCounter = GameObject.FindObjectOfType<ClickCounter>();
 
         //Set position and destination
         targetPosition = transform.position;
@@ -43,7 +43,7 @@ public class FoundObject : MonoBehaviour
             case nameof(ItemType.Battery):
                 GetBattery();
                 break;
-            case nameof(ItemType.Diamond):
+            case nameof(ItemType.Vacuum):
                 GetDiamond();
                 break;
             case nameof(ItemType.ScriptedItem):
@@ -52,26 +52,17 @@ public class FoundObject : MonoBehaviour
             default:
                 break;
         }
+
+        clickCounter.IncrementClickCount();
     }
 
-    //var scriptedEventCount = 0;
-    //string[] scriptItems =
-    //{
-    //    "Diamond",
-    //    "Phone",
-    //    "Vacuum"
-    //}
     private void GetScriptedItem()
     {
+        var scriptedItem = scriptedItemManager.GetNextScriptedItem();
+        if (scriptedItem == null) return;
 
-        //var item = scriptItems[scriptedEventCount];
-
-        //if(item == "Diamond")
-        //{
-        //    //GetDiamond();
-        //}
-
-        //scriptedEventCount++;
+        SetChildToParent(scriptedItem);
+        Debug.Log($"Got scripted item: {scriptedItem.name}");
     }
 
     void Update()
@@ -100,15 +91,14 @@ public class FoundObject : MonoBehaviour
         //spawn coin gameobject
         Debug.Log("Got Coin");
         SetChildToParent(coinObject);  //Instantiates object
-        itemCounts.IncrementItemCount(1, ItemType.Coin);
+        itemStates.IncrementItemCount(1, ItemType.Coin);
     }
-
 
     void GetBattery()
     {
         Debug.Log("Got Battery");
         SetChildToParent(batteryObject);
-        itemCounts.IncrementItemCount(1, ItemType.Battery);
+        itemStates.IncrementItemCount(1, ItemType.Battery);
     }
 
     void GetDiamond()
@@ -118,6 +108,6 @@ public class FoundObject : MonoBehaviour
         //Spawn Diamond gameobject
         Debug.Log("Got Diamond");
         SetChildToParent(diamondObject);
-        itemCounts.IncrementItemCount(1, ItemType.Diamond);
+        itemStates.IncrementItemCount(1, ItemType.Diamond);
     }
 }
