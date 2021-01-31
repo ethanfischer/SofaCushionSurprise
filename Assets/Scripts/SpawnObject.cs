@@ -9,6 +9,8 @@ public class SpawnObject : MonoBehaviour
     public GameObject spawnPoint;
     Vector3 spawnLocation;
 
+    public Animator armReach;
+
     private void Start()
     {
         spawnLocation = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y, spawnPoint.transform.position.z);
@@ -18,11 +20,24 @@ public class SpawnObject : MonoBehaviour
     {
         //Destroy any existing GOs before spawning a new one
         GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("GO Container");
-        foreach(GameObject go in spawnedObjects)
+        foreach (GameObject go in spawnedObjects)
         {
             Destroy(go);
         }
+        armReach.SetBool("isReaching", true);
+        StartCoroutine(ArmAnim());
+    }
+
+    public void ObjectSpawn()
+    {
+        
         //Spawn the new object
         Instantiate(spawnContainer, spawnLocation, Quaternion.identity);
+    }
+
+    public IEnumerator ArmAnim()
+    {
+        yield return new WaitForSeconds(1);
+        armReach.SetBool("isReaching", false);
     }
 }
