@@ -49,6 +49,7 @@ MonoBehaviour:
   coinObject: {fileID: 7737522328918264596, guid: f138b86582fb9c746b6f30e8ac28c9d6, type: 3}
   diamondObject: {fileID: 3284289169906052460, guid: a1dfbdb30dc2f9b4fa6ba6e0a1be286f, type: 3}
   batteryObject: {fileID: 7865425517231490982, guid: 8d17483756e0d744399f0796ef81ae97, type: 3}
+  gumObject: {fileID: 3533238874241203371, guid: 59098be7b931a524cbf354179347c11f, type: 3}
   audioSource: {fileID: -496624526426632456}
   foundNothingAC: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
 --- !u!82 &-496624526426632456
