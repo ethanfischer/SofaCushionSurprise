@@ -23,6 +23,7 @@ public class FoundObject : MonoBehaviour
     //Audio Variables
     public AudioSource audioSource;
     public AudioClip foundNothingAC;
+    public AudioClip vacuumClip;
 
     //Text Variables
     //public GameObject notifyPanel;
@@ -138,6 +139,8 @@ public class FoundObject : MonoBehaviour
         var isVaccumEquippedAndCharged = itemStates.discoveredVacuum && itemStates.isVacuumEquipped && itemStates.batteryCount > 0;
         if (isVaccumEquippedAndCharged)
         {
+            audioSource.Stop();
+            audioSource.PlayOneShot(vacuumClip);
             itemStates.IncrementItemCount(-1, ItemType.Battery); //use a battery each time the vacuum is enabled
             return Random.Range(1, randomizer.MaxCoinsVacuum);
         }

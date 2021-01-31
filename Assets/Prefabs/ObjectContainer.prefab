@@ -52,8 +52,7 @@ MonoBehaviour:
   gumObject: {fileID: 3533238874241203371, guid: 59098be7b931a524cbf354179347c11f, type: 3}
   audioSource: {fileID: -496624526426632456}
   foundNothingAC: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
-  notifyPanel: {fileID: 8823107306603680149, guid: d286535360de719449ca716d7b644f2f, type: 3}
-  notifyText: {fileID: 0}
+  vacuumClip: {fileID: 8300000, guid: 5ce608377e44e9443bfc962e35cf3971, type: 3}
 --- !u!82 &-496624526426632456
 AudioSource:
   m_ObjectHideFlags: 0
