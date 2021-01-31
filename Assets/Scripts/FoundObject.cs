@@ -124,6 +124,7 @@ public class FoundObject : MonoBehaviour
         if(!itemStates.discoveredDiamond)
         {
             Debug.Log("Haven't discovered diamond through scriptedItem yet, skipping click");
+            GetNothing();
             return;
         }
         //Display text stating that 1 diamond was found
