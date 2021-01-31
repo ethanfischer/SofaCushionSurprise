@@ -48,3 +48,9 @@ MonoBehaviour:
   coinObject: {fileID: 7737522328918264596, guid: f138b86582fb9c746b6f30e8ac28c9d6, type: 3}
   diamondObject: {fileID: 3284289169906052460, guid: a1dfbdb30dc2f9b4fa6ba6e0a1be286f, type: 3}
   batteryObject: {fileID: 7865425517231490982, guid: 8d17483756e0d744399f0796ef81ae97, type: 3}
+  batteryIcon: {fileID: 3181366816389947131, guid: 713e7ce92c4872145bf6fef83d40f854, type: 3}
+  coinIcon: {fileID: 5066399480958075937, guid: 7dd5436e3edc3e54ba290ef58f373b96, type: 3}
+  gumIcon: {fileID: 7089870693515094770, guid: f7a5fa92ffe98414f9819fa816b8e531, type: 3}
+  magnetIcon: {fileID: 4203954953996832727, guid: b5de793736b09c543a1422fdf7c57d87, type: 3}
+  minCoins: 0
+  maxCoins: 0

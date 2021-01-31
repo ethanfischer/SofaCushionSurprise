@@ -84,6 +84,7 @@ public class FoundObject : MonoBehaviour
 
     void GetCoin()
     {
+        scriptedItemManager.CoinsIcon.SetActive(true);
         //Determine how much money is found
         //Display text stating how much money is found
         //Add money to total
@@ -110,6 +111,7 @@ public class FoundObject : MonoBehaviour
 
     void GetBattery()
     {
+        scriptedItemManager.BatteriesIcon.SetActive(true);
         Debug.Log("Got Battery");
         SetChildToParent(batteryObject);
         itemStates.IncrementItemCount(1, ItemType.Battery);

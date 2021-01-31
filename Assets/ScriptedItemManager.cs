@@ -11,6 +11,10 @@ public class ScriptedItemManager : MonoBehaviour
 
     public GameObject VacuumIcon;
     public GameObject PhoneIcon;
+    public GameObject CoinsIcon;
+    public GameObject BatteriesIcon;
+    public GameObject GumIcon;
+    public GameObject MagnetIcon;
 
     public int RequiredClicksBetweenDiscoveries = 0;
 
