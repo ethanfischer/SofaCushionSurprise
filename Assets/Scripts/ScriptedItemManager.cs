@@ -98,7 +98,6 @@ public class ScriptedItemManager : MonoBehaviour
         PhoneIcon.SetActive(true);
 
         Array.Copy(initialDistributionFromEditor, randomizer.Distributions, initialDistributionFromEditor.Length); //put distribution back pre-diamond 
-        randomizer.Distributions[4] = 5; //make diamond discoverable now
         randomizer.RequiredClicksBetweenDiscoveries = initialRequiredClicksBetweenDiscoveriesFromEditor; //put required clicks back pre-diamond
         return Phone;
     }
@@ -127,7 +126,6 @@ public class ScriptedItemManager : MonoBehaviour
     private GameObject DiscoverVacuum()
     {
         itemStates.DiscoverItem(ItemType.Vacuum);
-        itemStates.isVacuumEquipped = true; //TODO remove this once we make the vacuum button work
         VacuumIcon.SetActive(true);
         return Vacuum;
     }
