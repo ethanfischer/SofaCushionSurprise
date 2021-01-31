@@ -42,7 +42,7 @@ public class FoundObject : MonoBehaviour
             case nameof(ItemType.Battery):
                 GetBattery();
                 break;
-            case nameof(ItemType.Vacuum):
+            case nameof(ItemType.Diamond):
                 GetDiamond();
                 break;
             case nameof(ItemType.ScriptedItem):

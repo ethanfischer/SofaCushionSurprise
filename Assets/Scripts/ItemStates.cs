@@ -26,7 +26,7 @@ public class ItemStates : MonoBehaviour
                 batteryCount += amount;
                 if (batteryCount < 0) batteryCount = 0;
                 break;
-            case ItemType.Vacuum:
+            case ItemType.Diamond:
                 diamondCount += amount;
                 break;
             default:
