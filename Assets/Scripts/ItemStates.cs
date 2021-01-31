@@ -15,6 +15,8 @@ public class ItemStates : MonoBehaviour
 
     public bool isVacuumEquipped { get; set; }
 
+    public GameObject notifyPanel;
+
     public void IncrementItemCount(int amount, ItemType itemType)
     {
         switch (itemType)

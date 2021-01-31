@@ -10,6 +10,8 @@ public class SpawnObject : MonoBehaviour
     public GameObject spawnPoint;
     Vector3 spawnLocation;
 
+    public GameObject notifyPanel;
+
     public Animator armReach;
 
     private void Start()
@@ -28,6 +30,7 @@ public class SpawnObject : MonoBehaviour
             Destroy(go);
         }
         armReach.SetBool("isReaching", true);
+        notifyPanel.SetActive(false);
     }
 
     public void ObjectSpawn()

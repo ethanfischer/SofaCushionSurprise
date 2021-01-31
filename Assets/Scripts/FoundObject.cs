@@ -1,4 +1,7 @@
+//using System;
+using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class FoundObject : MonoBehaviour
 {
@@ -19,6 +22,10 @@ public class FoundObject : MonoBehaviour
     //Audio Variables
     public AudioSource audioSource;
     public AudioClip foundNothingAC;
+
+    //Text Variables
+    //public GameObject notifyPanel;
+    //public TextMeshProUGUI notifyText;
 
     void Start()
     {
@@ -93,8 +100,21 @@ public class FoundObject : MonoBehaviour
         //spawn coin gameobject
         SetChildToParent(coinObject);  //Instantiates object
         var amount = GetCoinAmount();
+        //DisplayCoinAmount(amount);
+        StartCoroutine(DisplayCoinNotify(amount));
         itemStates.IncrementItemCount(amount, ItemType.Coin);
         Debug.Log($"Got {amount} Coin(s)");
+    }
+
+    void DisplayCoinAmount(int amount)
+    {
+        //Notification
+        //itemStates.notifyPanel.SetActive(true);
+        //GameObject.FindGameObjectWithTag("Notification Text").GetComponent<TextMeshProUGUI>().text = amount.ToString() + " coins";
+        //notifyPanel.SetActive(false);
+        //notifyText.GetComponent<TextMeshProUGUI>().text = amount.ToString();
+
+        string amountTotalText = amount.ToString() + " coins";
     }
 
     private int GetCoinAmount()
@@ -133,5 +153,12 @@ public class FoundObject : MonoBehaviour
         Debug.Log("Got Diamond");
         SetChildToParent(diamondObject);
         itemStates.IncrementItemCount(1, ItemType.Diamond);
+    }
+
+    IEnumerator DisplayCoinNotify(int amount)
+    {
+        yield return new WaitForSeconds(0.5f);
+        itemStates.notifyPanel.SetActive(true);
+        GameObject.FindGameObjectWithTag("Notification Text").GetComponent<TextMeshProUGUI>().text = amount.ToString() + " coins";
     }
 }
