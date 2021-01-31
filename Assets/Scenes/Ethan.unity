@@ -904,6 +904,10 @@ PrefabInstance:
       propertyPath: Distributions.Array.data[4]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4001025664115154365, guid: 6fa7203535b45c940b0f061e978c09d2, type: 3}
+      propertyPath: RequiredClicksBetweenDiscoveries
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa7203535b45c940b0f061e978c09d2, type: 3}
 --- !u!4 &363430442 stripped
@@ -1840,7 +1844,7 @@ PrefabInstance:
       objectReference: {fileID: 981637957}
     - target: {fileID: 592751126489994157, guid: 4793de23fb7ea6148a296bc31892d20b, type: 3}
       propertyPath: RequiredClicksBetweenDiscoveries
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 592751126489994158, guid: 4793de23fb7ea6148a296bc31892d20b, type: 3}
       propertyPath: m_RootOrder

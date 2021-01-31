@@ -8,6 +8,7 @@ public class Randomizer : MonoBehaviour
     public string[] Items;
     public int MaxCoinsNormal;
     public int MaxCoinsVacuum;
+    public int RequiredClicksBetweenDiscoveries = 0;
 
     public string ChooseItem()
     {
