@@ -70,12 +70,14 @@ public class ScriptedItemManager : MonoBehaviour
         if(didDiscoverTooSoon)
         {
             Debug.Log("Next discovery happened too soon, skipping");
+            GameObject.FindGameObjectWithTag("GO Container").GetComponent<FoundObject>().GetNothing();
         }
 
         var hasDiscoveredLastScriptedItem = scriptCounter >= scriptedItems.Length;
         if(hasDiscoveredLastScriptedItem)
         {
             Debug.Log("Player has discovered all the items");
+            GameObject.FindGameObjectWithTag("GO Container").GetComponent<FoundObject>().GetNothing();
         }
 
         return didDiscoverTooSoon || hasDiscoveredLastScriptedItem;

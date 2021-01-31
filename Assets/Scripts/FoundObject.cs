@@ -16,9 +16,9 @@ public class FoundObject : MonoBehaviour
     public GameObject diamondObject;
     public GameObject batteryObject;
 
-    //Money/Coin variables
-    public int minCoins;
-    public int maxCoins;
+    //Audio Variables
+    public AudioSource audioSource;
+    public AudioClip foundNothingAC;
 
     void Start()
     {
@@ -77,9 +77,11 @@ public class FoundObject : MonoBehaviour
         childGO.transform.SetParent(this.transform);
     }
 
-    void GetNothing()
+    public void GetNothing()
     {
         Debug.Log("Got Nothing");
+        audioSource.Stop();
+        audioSource.PlayOneShot(foundNothingAC);
     }
 
     void GetCoin()

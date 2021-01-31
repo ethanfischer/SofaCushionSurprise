@@ -28,19 +28,12 @@ public class SpawnObject : MonoBehaviour
             Destroy(go);
         }
         armReach.SetBool("isReaching", true);
-        StartCoroutine(ArmAnim());
     }
 
     public void ObjectSpawn()
     {
-        
+        armReach.SetBool("isReaching", false);
         //Spawn the new object
         Instantiate(spawnContainer, spawnLocation, Quaternion.identity);
-    }
-
-    public IEnumerator ArmAnim()
-    {
-        yield return new WaitForSeconds(1);
-        armReach.SetBool("isReaching", false);
     }
 }
