@@ -43,9 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37685b105c525c142a0fd6772d77ccd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Phone: {fileID: 0}
-  Diamond: {fileID: 0}
-  Vacuum: {fileID: 0}
+  Phone: {fileID: 4503329777811454362, guid: 8c75136c46a86a447897c04bc60003ca, type: 3}
+  Diamond: {fileID: 3284289169906052460, guid: a1dfbdb30dc2f9b4fa6ba6e0a1be286f, type: 3}
+  Vacuum: {fileID: 6567669330301971978, guid: 100bbbac9d1960b44b3bb8d645bb7bdb, type: 3}
+  VacuumIcon: {fileID: 0}
+  PhoneIcon: {fileID: 0}
+  CoinsIcon: {fileID: 0}
+  BatteriesIcon: {fileID: 0}
+  GumIcon: {fileID: 0}
+  MagnetIcon: {fileID: 0}
   scriptedItems:
   - Diamond
   - Phone

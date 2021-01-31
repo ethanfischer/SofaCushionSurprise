@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ScriptedItemManager : MonoBehaviour
@@ -16,7 +17,6 @@ public class ScriptedItemManager : MonoBehaviour
     public GameObject GumIcon;
     public GameObject MagnetIcon;
 
-    public int RequiredClicksBetweenDiscoveries = 0;
 
     private int scriptCounter = 0;
     public string[] scriptedItems =
@@ -28,17 +28,26 @@ public class ScriptedItemManager : MonoBehaviour
 
     private ItemStates itemStates;
     private ClickCounter clickCounter;
+    private Randomizer randomizer;
     private int previousDiscoveryClick = 0;
+
+    private int[] initialDistributionFromEditor;
+    private int initialRequiredClicksBetweenDiscoveriesFromEditor;
 
     private void Start()
     {
         itemStates = GameObject.FindObjectOfType<ItemStates>();
         clickCounter = GameObject.FindObjectOfType<ClickCounter>();
+        randomizer = GameObject.FindObjectOfType<Randomizer>();
+
+        initialDistributionFromEditor = new int[randomizer.Distributions.Length];
+        Array.Copy(randomizer.Distributions, initialDistributionFromEditor, randomizer.Distributions.Length);
+        initialRequiredClicksBetweenDiscoveriesFromEditor = randomizer.RequiredClicksBetweenDiscoveries;
     }
 
     public GameObject GetNextScriptedItem()
     {
-        if (ShouldPreventNextDiscovery()) return null; 
+        if (ShouldPreventNextDiscovery()) return null;
 
         GameObject result;
         var item = scriptedItems[scriptCounter];
@@ -66,15 +75,15 @@ public class ScriptedItemManager : MonoBehaviour
 
     private bool ShouldPreventNextDiscovery()
     {
-        var didDiscoverTooSoon = clickCounter.clickCount <= previousDiscoveryClick + RequiredClicksBetweenDiscoveries;
-        if(didDiscoverTooSoon)
+        var didDiscoverTooSoon = clickCounter.clickCount <= previousDiscoveryClick + randomizer.RequiredClicksBetweenDiscoveries;
+        if (didDiscoverTooSoon)
         {
             Debug.Log("Next discovery happened too soon, skipping");
             GameObject.FindGameObjectWithTag("GO Container").GetComponent<FoundObject>().GetNothing();
         }
 
         var hasDiscoveredLastScriptedItem = scriptCounter >= scriptedItems.Length;
-        if(hasDiscoveredLastScriptedItem)
+        if (hasDiscoveredLastScriptedItem)
         {
             Debug.Log("Player has discovered all the items");
             GameObject.FindGameObjectWithTag("GO Container").GetComponent<FoundObject>().GetNothing();
@@ -86,7 +95,10 @@ public class ScriptedItemManager : MonoBehaviour
     private GameObject DiscoverPhone()
     {
         itemStates.DiscoverItem(ItemType.Phone);
-        PhoneIcon.SetActive(true); 
+        PhoneIcon.SetActive(true);
+
+        Array.Copy(initialDistributionFromEditor, randomizer.Distributions, initialDistributionFromEditor.Length); //put distribution back pre-diamond 
+        randomizer.RequiredClicksBetweenDiscoveries = initialRequiredClicksBetweenDiscoveriesFromEditor; //put required clicks back pre-diamond
         return Phone;
     }
 
@@ -94,14 +106,27 @@ public class ScriptedItemManager : MonoBehaviour
     {
         itemStates.DiscoverItem(ItemType.Diamond);
         itemStates.IncrementItemCount(1, ItemType.Diamond);
+
+        //make it so next click discovers the phone
+        randomizer.Distributions = new int[]
+        { 
+            1,
+            0,
+            0,
+            0,
+            0
+        };
+
+        //make it so we don't prevent discovering diamond on next click
+        randomizer.RequiredClicksBetweenDiscoveries = 0;
+
         return Diamond;
     }
 
     private GameObject DiscoverVacuum()
     {
         itemStates.DiscoverItem(ItemType.Vacuum);
-        itemStates.isVacuumEquipped = true; //TODO remove this once we make the vacuum button work
-        VacuumIcon.SetActive(true); 
+        VacuumIcon.SetActive(true);
         return Vacuum;
     }
 }

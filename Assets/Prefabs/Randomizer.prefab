@@ -43,9 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b138e0ac4effc4d4ba5751aee9b5ed83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distributions: fa000000320000001900000005000000
+  Distributions: 0a000000050000000a0000000200000000000000
   Items:
+  - ScriptedItem
   - Nothing
   - Coin
   - Battery
   - Diamond
+  MaxCoinsNormal: 5
+  MaxCoinsVacuum: 150
+  RequiredClicksBetweenDiscoveries: 1
