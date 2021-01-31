@@ -13,7 +13,28 @@ public class ItemStates : MonoBehaviour
     public bool discoveredVacuum { get; private set; } = false;
     public bool discoveredDiamond { get; private set; } = false;
 
-    public bool isVacuumEquipped { get; set; }
+    private bool _isVacuumEquipped;
+    public bool isVacuumEquipped
+    {
+        get { return _isVacuumEquipped; }
+        set
+        {
+            if(value)
+            {
+                VacuumHandReplacement.SetActive(true);
+                HandModel.SetActive(false);
+            }
+            else
+            {
+                VacuumHandReplacement.SetActive(false);
+                HandModel.SetActive(true);
+            }
+
+            _isVacuumEquipped = value;
+        }
+    }
+    public GameObject HandModel;
+    public GameObject VacuumHandReplacement;
 
     public GameObject notifyPanel;
 

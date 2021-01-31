@@ -18,6 +18,7 @@ public class FoundObject : MonoBehaviour
     public GameObject coinObject;
     public GameObject diamondObject;
     public GameObject batteryObject;
+    public GameObject gumObject;
 
     //Audio Variables
     public AudioSource audioSource;
@@ -86,7 +87,22 @@ public class FoundObject : MonoBehaviour
 
     public void GetNothing()
     {
+        var r = Random.Range(0, 3);
+        if (r == 1)
+        {
+            GetGum();
+            return;
+        }
+
         Debug.Log("Got Nothing");
+        audioSource.Stop();
+        audioSource.PlayOneShot(foundNothingAC);
+    }
+
+    private void GetGum()
+    {
+        SetChildToParent(gumObject);
+        Debug.Log("Got Gum");
         audioSource.Stop();
         audioSource.PlayOneShot(foundNothingAC);
     }
@@ -141,7 +157,7 @@ public class FoundObject : MonoBehaviour
 
     void GetDiamond()
     {
-        if(!itemStates.discoveredDiamond)
+        if (!itemStates.discoveredDiamond)
         {
             Debug.Log("Haven't discovered diamond through scriptedItem yet, skipping click");
             GetNothing();
