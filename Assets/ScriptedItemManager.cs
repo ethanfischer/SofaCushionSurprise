@@ -9,6 +9,9 @@ public class ScriptedItemManager : MonoBehaviour
     public GameObject Diamond;
     public GameObject Vacuum;
 
+    public GameObject VacuumIcon;
+    public GameObject PhoneIcon;
+
     public int RequiredClicksBetweenDiscoveries = 0;
 
     private int scriptCounter = 0;
@@ -77,6 +80,7 @@ public class ScriptedItemManager : MonoBehaviour
     private GameObject DiscoverPhone()
     {
         itemStates.DiscoverItem(ItemType.Phone);
+        PhoneIcon.SetActive(true); 
         return Phone;
     }
 
@@ -90,6 +94,7 @@ public class ScriptedItemManager : MonoBehaviour
     {
         itemStates.DiscoverItem(ItemType.Vacuum);
         itemStates.isVacuumEquipped = true; //TODO remove this once we make the vacuum button work
+        VacuumIcon.SetActive(true); 
         return Vacuum;
     }
 }
